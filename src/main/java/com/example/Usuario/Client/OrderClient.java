@@ -27,13 +27,13 @@ public class OrderClient {
 
     // public List<Map<String, Object>> getAllOrdersByClient(String clientId) {}
     public String addOrder(Map<String, Object> order){
-        ResponseEntity<Map<String, Object>> response = webClient.post()
+        webClient.post()
                 .uri("/pedido")
                 .bodyValue(order)
                 .retrieve()
-                .bodyToMono(ResponseEntity.class)
+                .bodyToMono(Map.class)
                 .block();
-        return response.getBody().toString();
+        return "Reserva criada com sucesso!";
     }
 
 }
