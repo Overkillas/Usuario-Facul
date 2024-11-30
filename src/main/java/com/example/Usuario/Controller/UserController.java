@@ -7,7 +7,6 @@ import com.example.Usuario.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.Usuario.Client.UserRestClient;
 
 import java.util.List;
 import java.util.Map;
@@ -19,8 +18,6 @@ public class UserController {
     @Autowired
     UserService userService;
     @Autowired
-    UserRestClient userRestClient;
-    @Autowired
     OrderClient orderClient;
 
     @GetMapping("/order")
@@ -31,21 +28,6 @@ public class UserController {
     @PostMapping("/order")
     public String makeOrder(@RequestBody Map<String, Object> order){
         return orderClient.addOrder(order);
-    }
-
-    @GetMapping("/client/{id}")
-    public User getUser(@PathVariable Integer id) {
-        return userRestClient.getUserById(id);
-    }
-
-    @PostMapping("/client")
-    public String addUser(@RequestBody User user) {
-        return userRestClient.addUser(user);
-    }
-
-    @DeleteMapping("/client/{id}")
-    public String removeUserClient(@PathVariable Integer id) {
-        return userRestClient.removeUser(id);
     }
 
     @PostMapping()
