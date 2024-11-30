@@ -35,7 +35,7 @@ public class UserRestClient {
 
     public Map<String, Object> getAllOrders() {
         return webClient.get()
-                .uri("/pedido/todos")
+                .uri("pedido/todos")
                 .retrieve()
                 .bodyToMono(Map.class)
                 .block();
