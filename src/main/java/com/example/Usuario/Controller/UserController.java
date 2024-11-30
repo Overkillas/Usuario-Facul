@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping("/order")
-    public String makeOrder(Map<String, Object> order){
+    public String makeOrder(@RequestBody Map<String, Object> order){
         return orderClient.addOrder(order);
     }
 
