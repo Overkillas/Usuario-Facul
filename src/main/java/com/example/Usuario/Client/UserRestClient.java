@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDateTime;
+import java.util.Map;
+
 @Component
 public class UserRestClient {
 
@@ -12,16 +15,30 @@ public class UserRestClient {
 
     // Construtor, injetando o WebClient
     public UserRestClient(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("https://successful-gentleness-production.up.railway.app").build();
+        this.webClient = webClientBuilder.baseUrl("https://order-api-facul-production.up.railway.app/").build();
     }
 
-    // Método para obter o usuário por ID
+    public String createOrder(Integer idUsuario, Integer idProduto, Double valorTotal) {
+        Map<String, Object> pedidoData = Map.of(
+                "idUsuario", idUsuario,
+                "idProduto", idProduto,
+                "valorTotal", valorTotal,
+                "dataCompra", LocalDateTime.now()
+        );
+
+        return webClient.post()
+                .bodyValue(pedidoData)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+    }
+
     public User getUserById(Integer id) {
         return webClient.get()
-                .uri("/User/{id}", id) // Substitui o {id} pela variável id
-                .retrieve()  // Realiza a requisição
-                .bodyToMono(User.class)  // Converte o corpo da resposta para o tipo User
-                .block();  // Bloqueia até que a resposta seja recebida (pode ser assíncrono também)
+                .uri("/User/{id}", id)
+                .retrieve()
+                .bodyToMono(User.class)
+                .block();
     }
 
     // Método para adicionar um usuário

@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.Usuario.Client.UserRestClient;
 
+import java.time.LocalDateTime;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/User")
 public class UserController {
@@ -17,20 +20,29 @@ public class UserController {
     @Autowired
     UserRestClient userRestClient;
 
-    @GetMapping("/Client/{id}")
-    public User getUser(@PathVariable Integer id) {
-        return userRestClient.getUserById(id);
+    @PostMapping("/Order")
+    public String createOrder(@RequestBody Map<String, Object> pedidoData) {
+        Integer idUsuario = (Integer) pedidoData.get("idUsuario");
+        Integer idProduto = (Integer) pedidoData.get("idProduto");
+        Double valorTotal = (Double) pedidoData.get("valorTotal");
+
+        return userRestClient.createOrder(idUsuario, idProduto, valorTotal);
     }
 
-    @PostMapping("/Client")
-    public String addUser(@RequestBody User user) {
-        return userRestClient.addUser(user);
-    }
-
-    @DeleteMapping("/Client/{id}")
-    public String removeUserClient(@PathVariable Integer id) {
-        return userRestClient.removeUser(id);
-    }
+//    @GetMapping("/Client/{id}")
+//    public User getUser(@PathVariable Integer id) {
+//        return userRestClient.getUserById(id);
+//    }
+//
+//    @PostMapping("/Client")
+//    public String addUser(@RequestBody User user) {
+//        return userRestClient.addUser(user);
+//    }
+//
+//    @DeleteMapping("/Client/{id}")
+//    public String removeUserClient(@PathVariable Integer id) {
+//        return userRestClient.removeUser(id);
+//    }
 
     @PostMapping()
     public ResponseEntity<String> addUser(@RequestBody UserDTO user) {
