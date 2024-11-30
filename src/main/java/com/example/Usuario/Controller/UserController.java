@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/User")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -23,22 +23,27 @@ public class UserController {
     @Autowired
     OrderClient orderClient;
 
-    @GetMapping("/Order")
+    @GetMapping("/order")
     public List<Map<String, Object>> getOrders(){
         return orderClient.getAllOrders();
     }
 
-    @GetMapping("/Client/{id}")
+    @PostMapping("/order")
+    public String makeOrder(Map<String, Object> order){
+        return orderClient.addOrder(order);
+    }
+
+    @GetMapping("/client/{id}")
     public User getUser(@PathVariable Integer id) {
         return userRestClient.getUserById(id);
     }
 
-    @PostMapping("/Client")
+    @PostMapping("/client")
     public String addUser(@RequestBody User user) {
         return userRestClient.addUser(user);
     }
 
-    @DeleteMapping("/Client/{id}")
+    @DeleteMapping("/client/{id}")
     public String removeUserClient(@PathVariable Integer id) {
         return userRestClient.removeUser(id);
     }

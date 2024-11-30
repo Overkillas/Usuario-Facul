@@ -1,6 +1,7 @@
 package com.example.Usuario.Client;
 
 import com.example.Usuario.Entities.User;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -23,4 +24,16 @@ public class OrderClient {
                         .bodyToMono(List.class)
                         .block();
     }
+
+    // public List<Map<String, Object>> getAllOrdersByClient(String clientId) {}
+    public String addOrder(Map<String, Object> order){
+        ResponseEntity<Map<String, Object>> response = webClient.post()
+                .uri("/pedido")
+                .bodyValue(order)
+                .retrieve()
+                .bodyToMono(ResponseEntity.class)
+                .block();
+        return response.getBody().toString();
+    }
+
 }
