@@ -29,6 +29,11 @@ public class UserController {
         return userRestClient.createOrder(idUsuario, idProduto, valorTotal);
     }
 
+    @GetMapping("/Order")
+    public User getUser(@PathVariable Integer id) {
+        return userRestClient.getAllOrders();
+    }
+
 //    @GetMapping("/Client/{id}")
 //    public User getUser(@PathVariable Integer id) {
 //        return userRestClient.getUserById(id);

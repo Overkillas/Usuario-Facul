@@ -33,6 +33,14 @@ public class UserRestClient {
                 .block();
     }
 
+    public User getAllOrders() {
+        return webClient.get()
+                .uri("/pedido/todos")
+                .retrieve()
+                .bodyToMono(User.class)
+                .block();
+    }
+
     public User getUserById(Integer id) {
         return webClient.get()
                 .uri("/User/{id}", id)
