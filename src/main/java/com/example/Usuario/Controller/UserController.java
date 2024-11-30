@@ -1,5 +1,6 @@
 package com.example.Usuario.Controller;
 
+import com.example.Usuario.Client.OrderClient;
 import com.example.Usuario.DTOs.UserDTO;
 import com.example.Usuario.Entities.User;
 import com.example.Usuario.Services.UserService;
@@ -7,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.Usuario.Client.UserRestClient;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/User")
@@ -16,6 +20,13 @@ public class UserController {
     UserService userService;
     @Autowired
     UserRestClient userRestClient;
+    @Autowired
+    OrderClient orderClient;
+
+    @GetMapping("/Order")
+    public List<Map<String, Object>> getOrders(){
+        return orderClient.getAllOrders();
+    }
 
     @GetMapping("/Client/{id}")
     public User getUser(@PathVariable Integer id) {
