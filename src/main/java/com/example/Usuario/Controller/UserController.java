@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/Order")
-    public User getUser(@PathVariable Integer id) {
+    public Map<String, Object> getUser() {
         return userRestClient.getAllOrders();
     }
 

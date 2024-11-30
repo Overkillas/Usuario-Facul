@@ -33,11 +33,11 @@ public class UserRestClient {
                 .block();
     }
 
-    public User getAllOrders() {
+    public Map<String, Object> getAllOrders() {
         return webClient.get()
                 .uri("/pedido/todos")
                 .retrieve()
-                .bodyToMono(User.class)
+                .bodyToMono(Map.class)
                 .block();
     }
 
