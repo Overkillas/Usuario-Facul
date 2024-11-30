@@ -6,6 +6,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -33,11 +34,11 @@ public class UserRestClient {
                 .block();
     }
 
-    public Map<String, Object> getAllOrders() {
+    public List<Map<String, Object>> getAllOrders() {
         return webClient.get()
                 .uri("/pedido/todos")
                 .retrieve()
-                .bodyToMono(Map.class)
+                .bodyToMono(List.class)
                 .block();
     }
 

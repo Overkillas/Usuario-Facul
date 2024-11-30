@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.Usuario.Client.UserRestClient;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -29,15 +30,12 @@ public class UserController {
         return userRestClient.createOrder(idUsuario, idProduto, valorTotal);
     }
 
-    @GetMapping("/Order")
-    public Map<String, Object> getUser() {
-        return userRestClient.getAllOrders();
+    @GetMapping("/pedidos/todos")
+    public ResponseEntity<List<Map<String, Object>>> getAllOrders() {
+        List<Map<String, Object>> pedidos = userRestClient.getAllOrders();
+        return ResponseEntity.ok(pedidos);
     }
 
-    @GetMapping("/Client/{id}")
-    public User getUser(@PathVariable Integer id) {
-        return userRestClient.getUserById(id);
-    }
 //
 //    @PostMapping("/Client")
 //    public String addUser(@RequestBody User user) {
