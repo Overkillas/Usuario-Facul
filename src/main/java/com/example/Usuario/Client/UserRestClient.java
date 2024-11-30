@@ -23,7 +23,7 @@ public class UserRestClient {
                 "idUsuario", idUsuario,
                 "idProduto", idProduto,
                 "valorTotal", valorTotal,
-                "dataCompra", LocalDateTime.now()
+                "status", "PENDENTE"
         );
 
         return webClient.post()
@@ -35,7 +35,7 @@ public class UserRestClient {
 
     public Map<String, Object> getAllOrders() {
         return webClient.get()
-                .uri("pedido/todos")
+                .uri("/pedido/todos")
                 .retrieve()
                 .bodyToMono(Map.class)
                 .block();

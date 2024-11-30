@@ -34,10 +34,10 @@ public class UserController {
         return userRestClient.getAllOrders();
     }
 
-//    @GetMapping("/Client/{id}")
-//    public User getUser(@PathVariable Integer id) {
-//        return userRestClient.getUserById(id);
-//    }
+    @GetMapping("/Client/{id}")
+    public User getUser(@PathVariable Integer id) {
+        return userRestClient.getUserById(id);
+    }
 //
 //    @PostMapping("/Client")
 //    public String addUser(@RequestBody User user) {
