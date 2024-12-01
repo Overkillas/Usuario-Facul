@@ -52,4 +52,9 @@ public class UserController {
     public ResponseEntity<User> getUserById(@PathVariable Integer id) {
         return ResponseEntity.ok(userService.getById(id).orElse(null));
     }
+
+    @GetMapping()
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAll());
+    }
 }
