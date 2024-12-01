@@ -20,7 +20,6 @@ public class UserController {
     @Autowired
     OrderClient orderClient;
 
-
     @PostMapping("/order")
     public String makeOrder(@RequestBody Map<String, Object> order){
         return orderClient.addOrder(order);
@@ -50,7 +49,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserByEmail(@PathVariable Integer id) {
+    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
         return ResponseEntity.ok(userService.getById(id).orElse(null));
     }
 }
