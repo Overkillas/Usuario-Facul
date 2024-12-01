@@ -25,6 +25,14 @@ public class OrderClient {
                         .block();
     }
 
+    public List<Map<String, Object>> getOrderByUser(int id) {
+        return webClient.get()
+                .uri("/pedido/usuario/{id}")
+                .retrieve()
+                .bodyToMono(List.class)
+                .block();
+    }
+
     // public List<Map<String, Object>> getAllOrdersByClient(String clientId) {}
     public String addOrder(Map<String, Object> order){
         webClient.post()

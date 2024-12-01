@@ -20,15 +20,22 @@ public class UserController {
     @Autowired
     OrderClient orderClient;
 
-    @GetMapping("/order")
-    public List<Map<String, Object>> getOrders(){
-        return orderClient.getAllOrders();
-    }
 
     @PostMapping("/order")
     public String makeOrder(@RequestBody Map<String, Object> order){
         return orderClient.addOrder(order);
     }
+
+    @GetMapping("/order")
+    public List<Map<String, Object>> getOrders(){
+        return orderClient.getAllOrders();
+    }
+
+    @GetMapping("/order/{id}")
+    public List<Map<String, Object>> getOrder(@PathVariable int id){
+        return orderClient.getOrderByUser(id);
+    }
+
 
     @PostMapping()
     public ResponseEntity<String> addUser(@RequestBody UserDTO user) {
