@@ -27,7 +27,7 @@ public class OrderClient {
 
     public List<Map<String, Object>> getOrderByUser(int id) {
         return webClient.get()
-                .uri("/pedido/usuario/{id}")
+                .uri("/pedido/usuario/{id}", id)
                 .retrieve()
                 .bodyToMono(List.class)
                 .block();
